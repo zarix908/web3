@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/github.css" id="highlight-theme">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section class="slide1">
+					<h2>Web v3.0</h2>
+					<p>Данияр Хайрутдинов</p>
+					<div>
+						<a href="https://t.me/zarix908">zarix908</a>
+					</div>
+					<div>
+						<a href="https://infinetwireless.com/about">Infinet wireless</a>
+					</div>
+				</section>
+				<section>
+					<h2>CSRF</h2>
+					<p>(Cross-Site Request Forgery)</p>
+				</section>
+				<section>
+					<img src="./assets/owasp.png" alt="csrf owasp" width="362px">
+				</section>
+				<section>
+					<img src="assets/csrf_scheme.jpg" alt="csrf scheme" width="600px">
+				</section>
+				<section>
+					<pre><code data-trim data-noescape>
+					@app.route('/like', methods=['POST'])
+					def like():
+						id = request.form['id']
+						...
+				  	</code></pre>
+				</section>
+				<section>
+					<pre class="html"><code data-trim data-noescape>
+					&lt;form action="/like" method="POST"&gt;
+						&lt;label for="#idfield"&gt;post id:&lt;/label&gt;
+						&lt;input name="id" id="#idfield" /&gt;
+						&lt;input type="submit" value="Like!" /&gt;
+					&lt;/form&gt;
+				  	</code></pre>
+					<div>
+						<label class="label" for="#idfield">post id:</label>
+						<input name="id" id="#idfield" />
+						<button onclick="handleNormalClick()">Like!</button>
+					</div>
+				</section>
+				<section>
+					<pre class="html"><code data-trim data-noescape data-line-numbers="4">
+					&lt;form action="/like" method="POST"&gt;
+						&lt;label for="#idfield"&gt;post id:&lt;/label&gt;
+						&lt;input name="name" id="#idfield" /&gt;
+						&lt;input name="id" type="hidden" value="465" /&gt;
+						&lt;input type="submit" value="OK" /&gt;
+					&lt;/form&gt;
+				  	</code></pre>
+					<div>
+						<label class="label" for="#idfield1">name:</label>
+						<input name="name" id="#idfield1" />
+						<input name="id" type="hidden" value="465" />
+						<button onclick="handleMalwareClick()">OK</button>
+					</div>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+		<script>
+			function handleNormalClick() {
+				const t = document.getElementById("#idfield")
+				alert(`you like post ${t.value}`)
+			}
+
+			function handleMalwareClick() {
+				const t = document.getElementsByName("id")[1]
+				alert(`you like post ${t.value}`)
+			}
+		</script>
+	</body>
+</html>
