@@ -193,6 +193,43 @@
 					<h3>encrypted token</h3>
 					<span>Недостатки: нет</span>
 				</section>
+				<section>
+					<h3>Условия защиты от CSRF</h3>
+					<ul>
+						<li>отсутствие XSS</li>
+						<li>правильная настройка CORS</li>
+					</ul>
+				</section>
+				<section>
+					<a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy">
+						SOP (same-origin policy)
+					</a>
+				</section>
+				<section>
+					<span>origin: (protocol, host, port)</span>
+					<img src="./assets/origin.png" alt="same origin table" width="700px">
+				</section>
+				<section>
+					<img src="assets/csrf_scheme.jpg" alt="csrf scheme" width="600px">
+				</section>
+				<section class="slide23">
+					<img src="./assets/cors.png" alt="cors scheme" width="600px">
+					<p>Access-Control-Allow-Origin: *</p>
+				</section>
+				<section>
+					<h5>
+						Атаки через задокументированные возможности технологии
+					</h5>
+				</section>
+				<section>
+					<h2>XXE (XML external entity)</h2>
+				</section>
+				<section>
+					<img src="./assets/xxe_owasp.png" alt="xxe owasp" width="600px">
+				</section>
+				<section>
+					<img src="./assets/xxe_scheme.png" alt="xxe scheme" width="600px">
+				</section>
 
 			</div>
 		</div>
