@@ -116,6 +116,83 @@
 						}
 				  	</code></pre>
 				</section>
+				<section>
+					<h2>Защита от CSRF</h2>
+				</section>
+				<section>
+					<h3>CSRF token</h3>
+					<ul>
+						<li>synchronizer (statefull)</li>
+						<li>double submit cookie (stateless)</li>
+						<li>encrypted (stateless)</li>
+					</ul>
+				</section>
+				<section>
+					<h3>synchronizer token</h3>
+					<ol>
+						<li>генерация токена на сервере и сохранение</li>
+						<li>отправка токена клиенту через html или http header</li>
+						<li>отправка токена на сервер вручную в запросе</li>
+						<li>сверка с сохраненным токеном</li>
+					</ol>
+				</section>
+				<section>
+					<pre class="html"><code data-trim data-noescape data-line-numbers="4">
+					&lt;form action="/like" method="POST"&gt;
+					  &lt;label for="#idfield"&gt;post id:&lt;/label&gt;
+					  &lt;input name="id" id="#idfield" /&gt;
+					  &lt;input type="hidden" value="a3704352-..51e" /&gt;
+					  &lt;input type="submit" value="Like!" /&gt;
+					&lt;/form&gt;
+				  	</code></pre>
+				</section>
+				<section>
+					<h3>synchronizer token</h3>
+					<span>Недостатки:</span>
+					<ul>
+						<li>плохая масштабируемость</li>
+						<li>
+							получив токен можно пользоваться им до тех пор пока не истечет сессия
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h3>double submit cookie token</h3>
+					<ol>
+						<li>генерация токена на сервере <b>без сохранения</b></li>
+						<li>
+							отправка токена клиенту через html или http header,
+							<b>а также в куках</b>
+						</li>
+						<li>отправка токена на сервер вручную в запросе и автоматически с куками</li>
+						<li>сверка токена, отправленного вручную, с отправленным в куках</li>
+					</ol>
+				</section>
+				<section>
+					<h3>double submit cookie token</h3>
+					<span>Недостатки:</span>
+					<ul>
+						<li>
+							поддомены могут читать cookie основного домена, если явно это не запрещать
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h3>encrypted token</h3>
+					<ol>
+						<li>
+							токен генерируется посредством шифрования (id пользователя вместе с timestamp)
+						</li>
+						<li>
+							отправка токена клиенту через html или http header</li>
+						<li>отправка токена на сервер вручную в запросе</li>
+						<li>расшифровка токена и сопоставление id и timestamp</li>
+					</ol>
+				</section>
+				<section>
+					<h3>encrypted token</h3>
+					<span>Недостатки: нет</span>
+				</section>
 
 			</div>
 		</div>
