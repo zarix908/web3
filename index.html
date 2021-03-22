@@ -74,6 +74,48 @@
 						<button onclick="handleMalwareClick()">OK</button>
 					</div>
 				</section>
+				<section class="slide8">
+					<img src="./assets/facebook.jpg" alt="facebook" width="400px">
+					<ul>
+						<li>
+							наличие у пользователя друзей с определенным именем или ключевым
+							словом в названии профиля
+						</li>
+						<li>
+							каким страницам ставил лайки пользователь, и в каких группах он состоит
+						</li>
+						<li>
+							есть ли у него друзья, подписанные на определенную страницу
+						</li>
+						<li>
+							наличие фото из определенных локаций или стран
+						</li>
+						<li>
+							публиковал ли пользователь записи, содержащие определенные ключевые слова
+						</li>
+						<li>
+							есть ли у него друзья определенного вероисповедания
+						</li>
+					</ul>
+				</section>
+				<section>
+					<pre class="javascript"><code data-trim data-noescape>
+						function didLike() {
+						  if (fb == null) {
+						    fb = window.open("", "", "width=100");
+						  }
+
+						  fb.location = "https://www.facebook.com/search/str/" +
+						  	+ encodeURIComponent(page.value) +
+							+ "/pages-name/me/pages-liked/intersect";
+
+						  setTimeout(function () {
+						    const answer = fb.frames.length === 0 ? "No" : "Yes";
+							console.log(answer);
+						  }, 5000);
+						}
+				  	</code></pre>
+				</section>
 
 			</div>
 		</div>
