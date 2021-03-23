@@ -31,10 +31,10 @@
 					<p>(Cross-Site Request Forgery)</p>
 				</section>
 				<section>
-					<img src="./assets/owasp.png" alt="csrf owasp" width="362px">
+					<img src="./assets/owaspm.png" alt="csrf owasp" width="600px">
 				</section>
 				<section>
-					<img src="assets/csrf_scheme.jpg" alt="csrf scheme" width="600px">
+					<img src="assets/csrf_scheme.jpg" alt="csrf scheme" width="800px">
 				</section>
 				<section>
 					<pre><code data-trim data-noescape>
@@ -207,10 +207,10 @@
 				</section>
 				<section>
 					<span>origin: (protocol, host, port)</span>
-					<img src="./assets/origin.png" alt="same origin table" width="700px">
+					<img src="./assets/origin.png" alt="same origin table" width="900px">
 				</section>
 				<section>
-					<img src="assets/csrf_scheme.jpg" alt="csrf scheme" width="600px">
+					<img src="assets/csrf_scheme.jpg" alt="csrf scheme" width="800px">
 				</section>
 				<section class="slide23">
 					<img src="./assets/cors.png" alt="cors scheme" width="600px">
@@ -252,7 +252,7 @@
 					<img src="./assets/xxe_owasp.png" alt="xxe owasp" width="600px">
 				</section>
 				<section>
-					<img src="./assets/xxe_scheme.png" alt="xxe scheme" width="600px">
+					<img src="./assets/xxe_scheme.png" alt="xxe scheme" width="800px">
 				</section>
 				<section>
 					<h6>read file</h6>
@@ -349,7 +349,72 @@
 						}
 					</code></pre>
 				</section>
-				<section></section>
+				<section>
+					<img src="./assets/collision.jpg" alt="collision" width="800px">
+				</section>
+				<section>
+					<img src="./assets/hash_collision.png" alt="hash collision">
+				</section>
+				<section>
+					<h3>хэш функции</h3>
+					<ol class="hashes">
+						<li>MD4</li>
+						<li>MD5</li>
+						<li>SHA-1</li>
+						<li>SHA-2 (SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/256 и SHA-512/224)</li>
+						<li>SHA-3</li>
+					</ol>
+				</section>
+				<section>
+					<h2>MD5</h2>
+					<ul>
+						<li>state = [A B C D], где ABCD - 32 битные числа</li>
+						<li>
+							<img src="./assets/md5_block.png" alt="md5 scheme" width="600px">
+						</li>
+						<li>
+							f(<span class="s_red">init_state</span>, block_1) =
+								<span class="s_blue">state</span><br>
+							f(<span class="s_blue">state</span>, block_2) =
+								<span class="s_green">new_state</span><br>
+							...
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h2>HLE(hash length extension)</h2>
+				</section>
+				<!-- normal -->
+				<section>
+					<img src="./assets/hle_service/normal/pizza1.png" alt="pizza1" width="750px">
+				</section>
+				<section>
+					<img src="./assets/hle_service/normal/pizza2.png" alt="pizza2" width="750px">
+				</section>
+				<section>
+					<img src="./assets/hle_service/normal/pizza3.png" alt="pizza3" width="750px">
+				</section>
+				<section>
+					<img src="./assets/hle_service/normal/pizza4.png" alt="pizza4" width="750px">
+				</section>
+				<section>
+					<img src="./assets/hle_service/normal/pizza5.png" alt="pizza5" width="750px">
+				</section>
+				<!-- hacked -->
+				<section>
+					<img src="./assets/hle_service/normal/pizza1.png" alt="pizza1" width="750px">
+				</section>
+				<section>
+					<img src="./assets/hle_service/normal/pizza2.png" alt="pizza2" width="750px">
+				</section>
+				<section>
+					<img src="./assets/hle_service/hacked/pizza3.png" alt="pizza3" width="750px">
+				</section>
+				<!-- signed -->
+				<section>
+					<img src="./assets/hle_service/signed/pizza0.png" alt="pizza0" width="750px">
+				</section>
+
 			</div>
 		</div>
 
