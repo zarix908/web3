@@ -1860,3 +1860,9 @@ $notesWidthPercent: 25%;
 .s_blue {
 	color: blue;
 }
+
+.column2 {
+	display: flex;
+	flex-direction: column;
+	flex-basis: 50%;
+}

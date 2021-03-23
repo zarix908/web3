@@ -373,6 +373,10 @@
 							<img src="./assets/md5_block.png" alt="md5 scheme" width="600px">
 						</li>
 						<li>
+							md5(secret + data) = md5(secret + data + padding),
+							где padding - блок нулей
+						</li>
+						<li>
 							f(<span class="s_red">init_state</span>, block_1) =
 								<span class="s_blue">state</span><br>
 							f(<span class="s_blue">state</span>, block_2) =
@@ -434,6 +438,87 @@
 				</section>
 				<section>
 					<img src="./assets/hle_service/signed/pizza6.png" alt="pizza6" width="750px">
+				</section>
+				<section>
+					<dl>
+						<dt>pay_msg</dt>
+						<dd>
+							transaction_id=2778&price=10$
+						</dd>
+						<dt>sign</dt>
+						<dd>md5(secret + pay_msg)</dd>
+					</dl>
+					<p>
+						state = md5(secret + pay_msg) = sign
+					</p>
+				</section>
+				<section>
+					<ul>
+						<li>
+							md5(secret + data) == md5(secret + data + padding),
+							где padding - блок нулей
+						</li>
+						<li>
+							f(<span class="s_blue">state</span>, block) =
+							<span class="s_green">new_state</span><br>
+						</li>
+					</ul>
+					<p>
+						state = md5(secret + pay_msg) = (secret + pay_msg + padding) = sign
+					</p>
+					<p>
+						new_state = f(state, new_data_block)
+					</p>
+				</section>
+				<section>
+					<dl>
+						<dt>secret</dt>
+						<dd>c63ae93c-4e9f-4416-b40e-b807e9b94ab8</dd>
+						<dt>pay_msg</dt>
+						<dd>
+							transaction_id=2778&price=10$
+						</dd>
+						<dt>sign</dt>
+						<dd>5a32fa9dac3cfff7ea63c9c9167620b0</dd>
+						<dt>append data</dt>
+						<dd>&price=1$</dd>
+						<dt>sign</dt>
+						<dd>?</dd>
+					</dl>
+				</section>
+				<section>
+					new_pay_msg = <span class="s_red">transaction_id=2778&price=10$</span>
+				</section>
+				<section>
+					new_pay_msg = <span class="s_red">transaction_id=2778&price=10$</span>
+					<span>
+						\x80\x00\x00\x00\x00\x00\x00\x00
+						\x00\x00\x00\x00\x00\x00\x00\x00
+						\x00\x00\x00\x00\x00\x00\x00\x00
+						\x00\x00\x00\x00\x00\x00\x00\x00
+						\x00\x00\x00\x00\x00\x00\x00\x00
+						\x00\x00\x00\x00\x00\x00\x00\x00
+						\x00\x00\x00\x00\x00\x00\x00
+						<span class="s_red">\x08\x02\x00\x00\x00\x00\x00\x00</span>
+					</span>
+				</section>
+				<section>
+					<p>
+						new_pay_msg = <span class="s_red">transaction_id=2778&price=10$</span>
+						<span>
+							\x80\x00\x00\x00\x00\x00\x00\x00
+							\x00\x00\x00\x00\x00\x00\x00\x00
+							\x00\x00\x00\x00\x00\x00\x00\x00
+							\x00\x00\x00\x00\x00\x00\x00\x00
+							\x00\x00\x00\x00\x00\x00\x00\x00
+							\x00\x00\x00\x00\x00\x00\x00\x00
+							\x00\x00\x00\x00\x00\x00\x00
+							<span class="s_red">\x08\x02\x00\x00\x00\x00\x00\x00</span>
+						</span>
+						<span class="s_green">
+							&price=1$
+						</span>
+					</p>
 				</section>
 
 			</div>
